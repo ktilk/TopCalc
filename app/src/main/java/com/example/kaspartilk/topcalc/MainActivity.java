@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        screen = new CalculatorScreen("0", (TextView)findViewById(R.id.textViewOutput));
         loadSavedInstanceState(savedInstanceState);
     }
 
@@ -41,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState){
-        //TODO screen ja screen state salvestada
+        savedInstanceState.putString(STATE_SCREEN, screen.toString());
+        savedInstanceState.putBoolean(STATE_SCREEN_STATE, screen.getAddNextSymbolAsNew());
         savedInstanceState.putString(STATE_MAIN_ACTIVITY_PREVIOUS_OP, _prevOp);
         savedInstanceState.putDouble(STATE_MAIN_ACTIVITY_PREVIOUS_NUM, _prevNum);
         super.onSaveInstanceState(savedInstanceState);

@@ -38,8 +38,13 @@ public class CalculatorScreen {
         return Double.parseDouble(value);
     }
 
-    private void setValue(String s) {
+    public void setValue(String s) {
         this.value = s;
+        // Remove redundant ".0" from value
+        if (value.endsWith(".0")){
+            value = value.substring(0, value.length()-2);
+        }
+        refreshScreen();
     }
 
     public void setValue(double d) {
